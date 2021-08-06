@@ -20,7 +20,8 @@ module.exports = (app, cors, database, ejs, formidable, fs, iconv, linebyline, r
                         if (fields.guysmod == "on") mod = "guysmod";
 
                         database.query("INSERT INTO `5beam`(`id`, `name`, `author`, `description`, `difficulty`, `modname`, `levelpack`, `timestamp`) VALUES (?,?,?,?,?,?,?,?)", [result.length + 1, fields.name, fields.author, fields.description, fields.difficulty, mod, encodeURIComponent(fileContents), Math.round(new Date().getTime() / 1000)], function () {
-                            request.post("https://discord.com/api/webhooks/832871090283216936/OK2LJ8qsx-kV5b8yI89KQeMWMIYRU-B-JGP0ibUOR0nlMyRmYggb8lo_-4UluVQrmmIX").form({
+                            request.post
+                            (`https://discord.com/api/webhooks/873310477722189844/${process.env.WEBHOOK}`).form({
                                 "content": `New level: ***${fields.name}** by **${fields.author}***!${"\n"}https://5beam.5blevels.com/level/${result.length + 1}/`
                             });
 
@@ -43,7 +44,7 @@ module.exports = (app, cors, database, ejs, formidable, fs, iconv, linebyline, r
             if (req.body.guysmod == "on") mod = "guysmod";
         
             database.query("INSERT INTO `5beam`(id, name, author, description, difficulty, modname, levelpack, timestamp) VALUES (?,?,?,?,?,?,?,?)", [(result.length + 1), req.body.name, req.body.author, req.body.description, req.body.difficulty, mod, encodeURIComponent(req.body.uploadfile), Math.round(new Date().getTime() / 1000)], function () {
-                request.post("https://discord.com/api/webhooks/832871090283216936/OK2LJ8qsx-kV5b8yI89KQeMWMIYRU-B-JGP0ibUOR0nlMyRmYggb8lo_-4UluVQrmmIX").form({
+                request.post(`https://discord.com/api/webhooks/873310477722189844/${process.env.WEBHOOK}`).form({
                 "content": `New level: ***${req.body.name}** by **${req.body.author}***!${"\n"}https://5beam.5blevels.com/level/${result.length + 1}/`
                 });
             
