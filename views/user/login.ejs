@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ./header/mainheader %>
+        <% include ./header/back %>
+    </head>
+    <body>
+        <h1>Log in</h1>
+        <p id="info">You are currently not logged in.</p>
+        <a id="login" href="https://discord.com/api/oauth2/authorize?client_id=[ENTER CLIENT ID HERE]&redirect_uri=http%3A%2F%2Flocalhost%2Flogin&response_type=code&scope=identify">Login via Discord</a>
+    </body>
+</html>

@@ -1,0 +1,1 @@
+Error: ER_BAD_NULL_ERROR: Column 'difficulty' cannot be null

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("../header/mainheader", { title: info.name }); -%>
+        <%- include("../header/back"); -%> | <a href="/browse/">Back to browser</a>
+        <style>body{background-color: lavender;}</style>
+        <meta name="description" content="<%= info.description%>">
+    </head>
+    <body>
+        <h1><%= info.name %></h1>
+        <h2><i>By <%= info.author %></i></h2>
+        <p><%= info.description%></p>
+        <p>Difficulty level: <%= info.difficulty%></p>
+        <p><%= info.views%> Views</p>
+        <!--<p><%= info.likes%> Likes</p>-->
+
+        <br>
+        <button onclick="window.location.replace('fivebeam:\\<%= info.id %>');">Play</button>
+        <br>
+        <br>
+        <button onclick="window.location.replace('/download/<%= info.id %>');">Download levelpack</button>
+        <!--
+        <form>
+            <button formaction="fivebeam:\\<%= info.id %>">Play</button>
+            <br>
+            <br>
+            <button formaction="/5beam/download/<%= info.id %>">Download levelpack</button>
+        </form>
+        -->
+    </body>
+</html>

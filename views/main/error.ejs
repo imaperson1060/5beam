@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("../header/mainheader", { title: "Browse" }); -%>
+        <%- include("../header/back"); -%>
+        <style>body{background-color: papayawhip;background-image: url();}</style>
+    </head>
+    <body-no-image>
+        <%
+        if (error == "toobig") {%>
+            <h3>Sorry, but this file is too big (<%= size %> kilobytes). Click <a href="/upload.html">here</a> to go back.</h3>
+        <%
+        }
+        %>
+    </body-no-image>
+</html>

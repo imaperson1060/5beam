@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("../header/mainheader", { title: "Browse" }); -%>
+        <%- include("../header/back"); -%>
+        <style>body{background-color: papayawhip;background-image: url();}</style>
+    </head>
+    <body-no-image>
+        <div class="level-container">
+            <%
+            if (!info[0]) {%>
+                <h1>No one has uploaded a levelpack yet. You can be the first!</h1>
+            <%
+            }
+            info.forEach((levelinfo) => {
+            %>
+            <a href="/level/<%= levelinfo.id %>">
+                <div class="level-bar">
+                    <span class="level-bar-mod">
+                    <%
+                    if (levelinfo.mod == "guysmod") {%>
+                        Guy's mod
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <%
+                    } else {
+                    %>
+                        Vanilla 5b
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <%
+                    }
+                    %>
+                    </span>
+                    <span class="level-bar-title"><%= levelinfo.name %></span>
+                    <span class="level-bar-timestamp"><%= levelinfo.timestamp %> UTC</span>
+                    <span class="level-bar-author"><%= levelinfo.author %></span>
+                    <span class="level-bar-views">Views: <%= levelinfo.views %></span>
+                </div>
+            </a>
+            <%
+            });
+            %>
+        </div>
+    </body-no-image>
+</html>

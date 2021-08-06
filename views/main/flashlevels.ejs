@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("../header/mainheader", { title: "Browse" }); -%>
+        <%- include("../header/back"); -%>
+        <style>body{background-color: lavender;}</style>
+    </head>
+    <body>
+        <table id="level-table">
+            <tr>
+                <th>Name</th>
+                <th>Time</th>
+                <th>Author</th>
+                <th>Difficulty</th>
+            </tr>
+            <%
+                info.forEach((levelinfo) => {
+            %>
+            <tr>
+                <td><a href='/level/<%= levelinfo.id %>'><%= levelinfo.name %></a></td>
+                <td><%= levelinfo.timestamp %></td>
+                <td><%= levelinfo.author %></td>
+                <td><%= levelinfo.difficulty %></td>
+            </tr>
+            <%
+            });
+            %>
+        </table>
+    </body>
+</html>

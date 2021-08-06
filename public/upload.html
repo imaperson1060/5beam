@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>5beam Upload</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="keywords" content="5beam">
+        <meta name="author" content="Zelo101 and imaperson">
+        <meta name="description" content="Upload a level to 5beam">
+        <link rel="icon" href="/favicon.ico">
+        <link rel="stylesheet" href="/style.css">
+        <a href="/">Back to homepage</a>
+    </head>
+    <body>
+        <style>
+            body {
+            background-color: darkgray;
+            }
+        </style>
+        <h2>Rules:</h2>
+        <p>1. Your file must be a levelpack file. Other files <b>will</b> be deleted.</p>
+        <p>2. Filesize limit: 500KB</p>
+        <p>3. Files must not have inappropiate content.</p>
+        <p>4. Please put at least 53 levels in your levelpack. Right now only 53 will display and any less will crash 5b. I am working on fixing this so bear with me while I deal with my lack of confidence.</p>
+        <p>5. Make sure your levelpack works without any mods. (you can DM me your mod and I might put it up)</p>
+        <h2>Notices:</h2>
+        <p>For now, if you want your file deleted, you can DM me on discord, imaperson#1060. Don't tell anybody this but... there may or may not be an account system in the works!</p>
+        <form action="/upload" method="POST" ref="uploadForm" enctype="multipart/form-data">
+            <h2>Uploading process:</h2>
+            <label for="uploadfile">Upload your file:</label>
+            <input name="uploadfile" type="file" accept="text/plain">
+            <br>
+            <div id="5binfo">
+                <label for="author">Author:</label>
+                <input type="text" name="author" placeholder="John Doe..." maxlength="32" required>
+                <br>
+                <label for="name">Name:</label>
+                <input type="text" name="name" placeholder="Untitled Levelpack" maxlength="32" required>
+                <br>
+                <label for="description">Description:</label>
+                <textarea type="text" name="description" placeholder="Description... (Max 1024 characters)" maxlength="1024" required></textarea>
+                <br>
+            </div>
+            <label for="difficulty">Difficulty:</label>
+            <select name="difficulty" id="difficultySelection" required>
+                <option style="background-color: white" value="0" selected>None</option>
+                <option style="background-color: greenyellow" value="1">Easy</option>
+                <option style="background-color: yellow" value="2">Normal</option>
+                <option style="background-color: orange" value="3">Difficult</option>
+                <option style="background-color: orangered" value="4">Hard</option>
+                <option style="background-color: magenta;" value="5">Insane</option>
+                <option style="background-color: blueviolet" value="6">Extreme</option>
+                <option style="background-color: darkred" value="7">Borderline Impossible</option>
+            </select>
+            <br>
+            <label for="guysmod">Uses <a href="/mods/guysmod.exe" target="_blank">Guy's mod</a></label>
+            <input type="checkbox" name="guysmod">
+            <br>
+            <label for="agree">I agree to the <a href="/5beam/terms">terms and conditions</a> (coming soon)</label>
+            <input type="checkbox" name="agree" required disabled>
+            <br><br>
+            <input type="submit" value="Upload!">
+        </form>
+    </body>
+</html>
