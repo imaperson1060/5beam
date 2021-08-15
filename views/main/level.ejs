@@ -15,6 +15,13 @@
         <!--<p><%= info.likes%> Likes</p>-->
 
         <br>
+        <div class="stage">
+            <div id="heart"></div>
+        </div>
+        <div id="likeCounter" class="stage" style="user-select:none;pointer-events:none;"><%= info.likes %></div>
+
+        <br>
+        <br>
         <button onclick="window.location.replace('fivebeam:\\<%= info.id %>');">Play</button>
         <br>
         <br>
@@ -27,5 +34,72 @@
             <button formaction="/5beam/download/<%= info.id %>">Download levelpack</button>
         </form>
         -->
+
+        <style>
+            #heart {
+                width: 100px;
+                height: 100px;
+                background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+                background-position: 0 0;
+                cursor: pointer;
+                transition: background-position 1s steps(28);
+                transition-duration: 0s;
+            }
+            #heart.is-active {
+                transition-duration: 1s;
+                background-position: -2800px 0;
+            }
+            .stage {
+                position: fixed;
+                left: 35px;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+
+            $("#heart").hide();
+
+            <%
+            if (user) {%>
+            socket.emit("getLikeStatus", <%= info.id %>, <%= user.id %>);
+            socket.on("likeStatus", (status) => {
+                $("#heart").show();
+                if (status) $("#heart").addClass("is-active");
+            });
+            <%
+            } else {%>
+                $("#heart").show();
+            <%
+            }
+            %>
+
+            $("#heart").on("click", function() {
+                if ($("#heart")[0].classList.contains("is-active")) {
+                    <%
+                    if (user) {%>
+                    $("#heart").removeClass("is-active");
+                    $("#likeCounter").html(parseInt($("#likeCounter").html()) - 1);
+                    socket.emit("unlike", <%= info.id %>, <%= user.id %>);
+                    <%
+                    }
+                    %>
+                } else {
+                    <%
+                    if (user) {%>
+                    $("#heart").addClass("is-active");
+                    $("#likeCounter").html(parseInt($("#likeCounter").html()) + 1);
+                    socket.emit("like", <%= info.id %>, <%= user.id %>);
+                    <%
+                    } else {%>
+                    alert("You must be logged in to like a levelpack.");
+                    <%
+                    }
+                    %>
+                }
+            });
+        </script>
     </body>
 </html>

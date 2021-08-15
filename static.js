@@ -1,6 +1,6 @@
 module.exports = (app, database, ejs) => {
     app.get("/", (req, res) => {
-        ejs.renderFile("views/main/index.ejs", { login: false }, null, function(err, str) {
+        ejs.renderFile("views/main/index.ejs", { login: req.isAuthenticated() }, null, function(err, str) {
             res.send(str);
         });
     });
@@ -38,7 +38,7 @@ module.exports = (app, database, ejs) => {
                 return;
             }
             
-            ejs.renderFile("views/main/level.ejs", { info: result[0], id: req.params.id }, null, function (err, str) {
+            ejs.renderFile("views/main/level.ejs", { info: result[0], id: req.params.id, user: req.user }, null, function (err, str) {
                 res.send(str);
             });
         });
