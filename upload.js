@@ -38,9 +38,9 @@ module.exports = (app, database, ejs, fetch, formidable, iconv, linebyline) => {
 
         database.query(`SELECT * FROM \`5beam\``, function (err, result) {
             var mod = "vanilla";
-            if (req.body.guysmod == "on") mod = "guysmod";
+            if (req.body.guysmod == "true") mod = "guysmod";
         
-            database.query("INSERT INTO `5beam`(id, name, author, description, difficulty, modname, levelpack, timestamp) VALUES (?,?,?,?,?,?,?,?)", [(result.length + 1), req.body.name, req.body.author, req.body.description, req.body.difficulty, mod, encodeURIComponent(req.body.uploadfile), Math.round(new Date().getTime() / 1000)], function () {
+            database.query("INSERT INTO `5beam`(`id`, `name`, `author`, `description`, `difficulty`, `modname`, `levelpack`, `timestamp`, `uploader`) VALUES (?,?,?,?,?,?,?,?,?)", [(result.length + 1), req.body.name, req.body.author, req.body.description, req.body.difficulty, mod, encodeURIComponent(req.body.uploadfile), Math.round(new Date().getTime() / 1000), "Guest"], function (err) {
                 fetch(`https://discord.com/api/webhooks/873310477722189844/${process.env.WEBHOOK}`, { method: "POST", body: `content=New level: ***${req.body.name}** by **${req.body.author}***!${"\n"}https://5beam.5blevels.com/level/${result.length + 1}/` });
             
                 res.json([{ success: true, message: (result.length + 1) }]);
