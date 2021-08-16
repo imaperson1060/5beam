@@ -45,6 +45,6 @@ module.exports = (app, database, ejs) => {
     });
 
     app.get("/version", (req, res) => {
-        res.json([{ version: "5" }]);
+        res.json([{ version: "5-beta" }]);
     });
 }
