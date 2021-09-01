@@ -19,6 +19,8 @@ const DiscordStrategy = require("passport-discord").Strategy;
 const passport = require("passport");
 const session = require("express-session");
 
+require("dotenv").config();
+
 const mysqlLogin = JSON.parse(process.env.MYSQL);
 var database = mysql.createPool({
     host     : mysqlLogin.server,
