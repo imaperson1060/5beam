@@ -22,12 +22,7 @@ const session = require("express-session");
 require("dotenv").config();
 
 const mysqlLogin = JSON.parse(process.env.MYSQL);
-var database = mysql.createPool({
-    host     : mysqlLogin.server,
-    user     : mysqlLogin.username,
-    password : mysqlLogin.password,
-    database : mysqlLogin.database
-});
+var database = mysql.createPool(mysqlLogin);
 
 app.use(bodyParser.text());
 app.use(bodyParser.json());
