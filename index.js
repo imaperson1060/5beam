@@ -36,6 +36,12 @@ require("./discord.js")(app, DiscordStrategy, passport, session);
 require("./static.js")(app, database, ejs);
 require("./upload.js")(app, database, ejs, fetch, formidable, iconv, linebyline);
 
+app.post("/restart/", (req, res) => {
+    if ((req.body.repository.id == 393501315) && (req.body.sender.id == 68653653)) {
+        process.exit();
+    }
+});
+
 server.listen(process.env.PORT, () => {
     console.log(`5beam API ready!`);
 });
