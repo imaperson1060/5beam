@@ -8,6 +8,7 @@ const io = new Server(server);
 
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const crypto = require("crypto");
 const ejs = require("ejs");
 const fetch = require("node-fetch");
 const formidable = require("formidable");
@@ -36,8 +37,16 @@ require("./discord.js")(app, DiscordStrategy, passport, session);
 require("./static.js")(app, database, ejs);
 require("./upload.js")(app, database, ejs, fetch, formidable, iconv, linebyline);
 
+
 app.post("/restart/", (req, res) => {
-    if ((req.body.repository.id == 393501315) && (req.body.sender.id == 68653653)) {
+    const expectedSignature = "sha1=" +
+        crypto.createHmac("sha1", process.env.PASSWORD)
+            .update(JSON.stringify(req.body))
+            .digest("hex");
+
+    const signature = req.headers["x-hub-signature"];
+    if (signature == expectedSignature) {
+        res.sendStatus(200);
         process.exit();
     }
 });
